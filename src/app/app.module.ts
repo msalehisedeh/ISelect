@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -9,7 +8,6 @@ import { ISelectModule } from './iselect/iselect.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
     ISelectModule
   ],
   providers: [
