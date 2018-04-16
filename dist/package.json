@@ -1,5 +1,5 @@
 {
-  "name": "iselect",
+  "name": "icon-select",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
@@ -42,9 +42,9 @@
     "tslint": "^5.7.0",
     "typescript": "^2.4.2"
   },
-  "main": "bundles/iselect.umd.js",
-  "module": "esm5/iselect.js",
-  "es2015": "esm2015/iselect.js",
-  "typings": "iselect.d.ts",
-  "metadata": "iselect.metadata.json"
+  "main": "bundles/icon-select.umd.js",
+  "module": "esm5/icon-select.js",
+  "es2015": "esm2015/icon-select.js",
+  "typings": "icon-select.d.ts",
+  "metadata": "icon-select.metadata.json"
 }

@@ -1,6 +1,6 @@
-# Welcome to ISelect!
+# Welcome to ICon Select!
 
-Have you ever wanted to have an easy to use component that looks exactly (almost) like a select tag with the added benefit of showing icons instead of words? Have you wanted to transform a select tag into a more meaningful dropdown when it comes to have a list of images to pick? If so, then welcome to ISelect!
+Have you ever wanted to have an easy to use component that looks exactly (almost) like a select tag with the added benefit of showing icons instead of words? Have you wanted to transform a select tag into a more meaningful dropdown when it comes to have a list of images to pick? If so, then welcome to Icon Select!
 
 [Live Demo](https://iselect.stackblitz.io) | [Source code](https://github.com/msalehisedeh/iselect)
 
