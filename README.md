@@ -18,7 +18,11 @@ DEPENDENCIES:
     "font-awesome": "^4.7.0"
 ```
 
-Sample usage
+## So... How it can be done?
+
+Run `npm install iselect` in your application. and do either of the following:
+
+Sample usage through using i-select component or i-select directive.
 ```javascript
     <i-select 
       id="backgroundPicker" 
@@ -38,4 +42,8 @@ Sample usage
     </select>
 ```
 
+It is that simple..!!
+
+Sample view of the component at work!
+![alt text](https://raw.githubusercontent.com/msalehisedeh/iselect/master/sample.png "What you would see when a comparison is performed")
 
