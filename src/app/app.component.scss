@@ -1,0 +1,39 @@
+[imageholder] ::ng-deep img{
+    width: 200px;
+}
+
+:host {
+    .titles {
+        z-index: 3;
+        color: #fff;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        h1, h2, h3 {
+            color: #fff;
+            margin: 0;
+        }
+        .centered {
+            float: left;
+            margin-top: 25px;
+        }
+    }
+    .pickedIcon {
+        box-sizing: border-box;
+        margin:0;
+        padding:0;
+        width: 100vw;
+        height: 100%;
+
+        &.cover {
+            background-size: cover !important;
+            position: absolute;
+            top: 0;
+        }
+        .pickedPattern {
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+        }
+    }
+}

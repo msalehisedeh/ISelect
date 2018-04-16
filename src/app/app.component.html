@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="titles">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <h2>Background: {{selectedImage ? selectedImage.name : 'TBD'}}</h2>
+  <h3>Cover pattern: {{selectedPattern ? selectedPattern.name:''}}</h3>
+  <div class="centered">
+    <i-select 
+      id="backgroundPicker" 
+      name="selectedBackground" 
+      [size]="6" 
+      [multiselect]="false" 
+      [entries]="iconpickeData"
+      [searchEnabled]="true" 
+      (onchange)="updateSelection($event)">
+    </i-select>
+  
+    <select i-select 
+        id="overlayPicker1" size="6" name="selectedOverlay"
+        [searchEnabled]="false" 
+        (change)="updateOverlay($event)" >
+      <option *ngFor="let x of iconpickeOverlay" [value]="x.value" [textContent]="x.name"></option>
+    </select>
+  </div>
+</div>
+
+<div 
+    *ngIf="selectedImage !== null" 
+    class="pickedIcon" 
+    [class.cover]="true" 
+    [style.background]="selectedImage.value | CSSImage:false" >
+
+  <div 
+      *ngIf="selectedPattern!=null" 
+      class="pickedPattern" 
+      [style.background]="selectedPattern.value | CSSImage:true" ></div>
+</div>

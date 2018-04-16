@@ -1,0 +1,63 @@
+<div class="i-select" [id]="configID">
+    <div class="selected-icon">
+        <div class="select-icon-block" 
+            [style.background]="config.selectedItem ? (config.selectedItem.value | CSSImage:true)  : ''"></div>
+        <div class="fa-li fa fa-spinner fa-spin select-icon-spin3" *ngIf="config.loading"></div>
+    </div>
+    <a href="#" class="i-select-button" 
+        (click)="popIcons($event)" 
+        (keyup)="keyboardTracker($event)" >
+    <span class="off-screen" id="{{configID}}name" [textContent]="name"></span>
+    <span class="select-icon-down-dir"></span>
+    </a>
+</div>
+<div class="i-select-popup" [style.display]="config.open ? 'block':'none'" >
+    <div class="i-select-search" (click)="searchInput.focus()" *ngIf="searchEnabled">
+        <input type="text" placeholder="placeholder" #searchInput
+            class="icons-search-input" 
+            [class.focused]="config.isFocused"
+            (focus)="config.isFocused=true"
+            (blur)="config.isFocused=false"
+            (keyup)="performSearch($event, searchInput.value)" />
+        <div class="select-icon-search" #searchIcon [class]="config.isSearch ? 'select-icon-cancel' : 'select-icon-search'"></div>
+    </div>
+    <div class="clear-fix"></div>
+    <div role="list" attr.aria-nameledby="{{configID}}name" class="select-icons-container" #iconContainer>
+    <div 
+        role="listitem" 
+        class="select-box" 
+        *ngFor="let item of displayItems; let i = index">
+        <div  [class.highlight-icon]="highlightIndex==i"
+            [class.cover]="!true" [title]="showIconName ? '':'item.name'"
+            [style.background]="item.value | CSSImage:true"
+            (click)="selectIcon(i)"><span class="off-screen" [textContent]="item.name"></span></div>
+    </div>
+    </div>
+    <div class="icons-select-error" *ngIf="config.hasError"><div class="select-icon-block" data-select-value="select-icon-block"></div></div>
+    <div class="i-select-footer" *ngIf="config.showFooter">
+    <div class="i-select-arrows">
+        <div class="fa fa-angle-left"
+            (click)="prev($event)"
+            [class.disabled]="config.currentPage==1">
+            <span class="prev" [textContent]="'previous'"></span>
+        </div>
+        <div class="fa fa-angle-double-left"
+                (click)="first($event)"
+                [class.disabled]="config.currentPage==1">
+            <span class="first" [textContent]="'first'"></span>
+        </div>
+        <div class="i-select-pages"><span [textContent]="config.currentPage + ' / ' + config.totalPage"></span></div>
+        <div class="fa fa-angle-double-right"
+                (click)="last($event)"
+                [class.disabled]="config.currentPage==config.totalPage">
+            <span class="last" [textContent]="'last'"></span>
+        </div>
+        <div class="fa fa-angle-right"
+                (click)="next($event)"
+                [class.disabled]="config.currentPage==config.totalPage">
+            <span class="next" [textContent]="'nextPage'"></span>
+        </div>
+    </div>
+    </div>
+    <div class="name" *ngIf="showIconName" [textContent]="config.selectedItem ? config.selectedItem.name : ''"></div>
+</div>
