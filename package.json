@@ -1,6 +1,6 @@
 {
   "name": "icon-select",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -15,7 +15,6 @@
     "@angular/common": "^5.0.0 || ^4.0.0 || ^2.0.0",
     "@angular/compiler": "^5.0.0 || ^4.0.0 || ^2.0.0",
     "@angular/core": "^5.0.0 || ^4.0.0 || ^2.0.0",
-    "@angular/platform-browser": "^5.2.9",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "zone.js": "^0.8.14"
@@ -23,6 +22,7 @@
   "devDependencies": {
     "@angular/cli": "^1.6.7",
     "@angular/compiler-cli": "^5.0.0 || ^4.0.0 || ^2.0.0",
+    "@angular/platform-browser": "^5.0.0 || ^4.0.0 || ^2.0.0",
     "@types/node": "^6.0.60",
     "codelyzer": "^3.2.0",
     "ng-packagr": "^2.0.0",

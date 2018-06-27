@@ -51,8 +51,7 @@ class ISelect {
         this.size = 3;
         this.multiselect = false;
         // showIconName should be handled by css from user
-        // @Input("showIconName")
-        // private showIconName = false;
+        this.showIconName = false;
         this.configData = [];
         this.displayItems = [];
         this.onchange = new EventEmitter();
@@ -338,7 +337,7 @@ ISelect.decorators = [
     <a href="#" class="i-select-button"
         (click)="popIcons($event)"
         (keyup)="keyboardTracker($event)" >
-    <span class="off-screen" id="{{configID}}name" [textContent]="name"></span>
+    <span class="off-screen" id="{{configID}}name" [textContent]="configName"></span>
     <span class="select-icon-down-dir"></span>
     </a>
 </div>
@@ -358,8 +357,8 @@ ISelect.decorators = [
         role="listitem"
         class="select-box"
         *ngFor="let item of displayItems; let i = index">
-        <div  [class.highlight-icon]="highlightIndex==i"
-            [class.cover]="!true" [title]="showIconName ? '':'item.name'"
+        <div [class.highlight-icon]="highlightIndex==i"
+            [class.cover]="!true" [title]="showIconName ? '':item.name"
             [style.background]="item.value | CSSImage:true"
             (click)="selectIcon(i)"><span class="off-screen" [textContent]="item.name"></span></div>
     </div>
@@ -652,6 +651,7 @@ ISelect.propDecorators = {
     "searchEnabled": [{ type: Input, args: ["searchEnabled",] },],
     "size": [{ type: Input, args: ["size",] },],
     "multiselect": [{ type: Input, args: ["multiselect",] },],
+    "showIconName": [{ type: Input, args: ["showIconName",] },],
     "configData": [{ type: Input, args: ["entries",] },],
     "onchange": [{ type: Output, args: ["onchange",] },],
     "onClick": [{ type: HostListener, args: ['window:click', ['$event'],] },],

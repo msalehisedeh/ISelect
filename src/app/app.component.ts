@@ -13,10 +13,10 @@ import { IconInfo } from './iselect/components/iselect.component';
 	@ViewChild('pickedoverlay', {read: ViewContainerRef}) private pickedoverlay: ViewContainerRef;
 	@ViewChild('pickedImage', {read: ViewContainerRef}) private pickedImage: ViewContainerRef;
 
-	private iconpickeData:IconInfo[] = [];
-	private iconpickeOverlay:IconInfo[] = [];
-	private selectedImage:IconInfo = null;
-	private selectedPattern:IconInfo = null;
+	iconpickeData:IconInfo[] = [];
+	iconpickeOverlay:IconInfo[] = [];
+	selectedImage:IconInfo = null;
+	selectedPattern:IconInfo = null;
 
 	constructor(){
 		this.iconpickeData = [

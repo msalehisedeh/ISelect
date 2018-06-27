@@ -25,12 +25,23 @@ export declare class ISelect implements OnInit {
     searchEnabled: boolean;
     size: number;
     multiselect: boolean;
+    showIconName: boolean;
     configData: IconInfo[];
-    private displayItems;
+    displayItems: IconInfo[];
     onchange: EventEmitter<{}>;
     private highlightIndex;
     private searchedData;
-    private config;
+    config: {
+        totalPage: number;
+        currentPage: number;
+        open: boolean;
+        showFooter: boolean;
+        hasError: boolean;
+        isFocused: boolean;
+        isSearch: boolean;
+        loading: boolean;
+        selectedItem: IconInfo;
+    };
     onClick($event: KeyboardEvent): void;
     private el;
     constructor(el: ElementRef, renderer: Renderer);

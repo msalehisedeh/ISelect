@@ -28,6 +28,7 @@ var globalActiveDropdown:ISelect[] = [];
 
 @Pipe({name:'CSSImage'})
 export class CSSImagePipe implements PipeTransform{
+
   constructor(private sanitizer:DomSanitizer){}
   transform(url: string,repeat?:boolean): any { 
 	  return this.sanitizer.bypassSecurityTrustStyle("url('"+url+"') "+(repeat ? "repeat":"no-repeat")+" 0 0 transparent");
@@ -71,13 +72,13 @@ export class ISelect implements OnInit {
 	public multiselect = false;
 
 	// showIconName should be handled by css from user
-	// @Input("showIconName")
-	// private showIconName = false;
+	@Input("showIconName")
+	showIconName = false;
 	
 	@Input("entries")
 	public configData:IconInfo[] = [];
 	
-	private displayItems:IconInfo[] = [];
+	displayItems:IconInfo[] = [];
 	
 	@Output("onchange")
 	public onchange = new EventEmitter();
@@ -86,7 +87,7 @@ export class ISelect implements OnInit {
 	private searchedData:IconInfo[] = [];
 
 
-	private config ={
+	config ={
 		totalPage:1,
 		currentPage:0,
 		open:false,
