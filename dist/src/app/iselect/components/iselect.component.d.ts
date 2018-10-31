@@ -29,8 +29,8 @@ export declare class ISelect implements OnInit {
     configData: IconInfo[];
     displayItems: IconInfo[];
     onchange: EventEmitter<{}>;
-    private highlightIndex;
-    private searchedData;
+    highlightIndex: number;
+    searchedData: IconInfo[];
     config: {
         totalPage: number;
         currentPage: number;

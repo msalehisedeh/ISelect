@@ -1,14 +1,7 @@
 {
   "name": "icon-select",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "lint": "ng lint",
-    "packagr": "ng-packagr -p ng-package.json"
-  },
   "private": false,
   "keywords": [
     "Angular 2+",
@@ -25,30 +18,37 @@
     "best"
   ],
   "dependencies": {
-    "@angular/common": "^6.0.0 || ^5.0.0 || ^4.0.0 || ^2.0.0",
-    "@angular/compiler": "^6.0.0 || ^5.0.0 || ^4.0.0 || ^2.0.0",
-    "@angular/core": "^6.0.0 || ^5.0.0 || ^4.0.0 || ^2.0.0",
-    "core-js": "^2.4.1",
+    "@angular/common": "^6.0.0",
+    "@angular/compiler": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
-    "zone.js": "^0.8.14",
-    "tslib": "^1.7.1"
+    "zone.js": "^0.8.26",
+    "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "@angular/cli": "^1.6.7",
-    "@angular/compiler-cli": "^6.0.0 || ^5.0.0 || ^4.0.0 || ^2.0.0",
-    "@angular/platform-browser": "^6.0.0 || ^5.0.0 || ^4.0.0 || ^2.0.0",
-    "rxjs": "^6.2.2",
+    "@angular-devkit/build-angular": "~0.8.0",
+    "@angular/cli": "^6.2.6",
+    "@angular/compiler-cli": "^6.0.0",
+    "@angular/platform-browser": "^6.0.0",
     "@types/node": "^6.0.60",
-    "codelyzer": "^3.2.0",
-    "ng-packagr": "^2.0.0",
-    "protractor": "^5.1.2",
-    "ts-node": "^3.2.0",
-    "tslint": "^5.7.0",
-    "typescript": "^2.4.2"
+    "rxjs": "^6.2.2",
+    "rxjs-compat": "^6.2.2",
+    "codelyzer": "~4.5.0",
+    "ng-packagr": "^4.4.0",
+    "protractor": "~5.3.0",
+    "ts-node": "~5.0.1",
+    "tslint": "~5.7.0",
+    "typescript": "~2.7.2"
   },
   "main": "bundles/icon-select.umd.js",
-  "module": "esm5/icon-select.js",
-  "es2015": "esm2015/icon-select.js",
+  "module": "fesm5/icon-select.js",
+  "es2015": "fesm2015/icon-select.js",
+  "esm5": "esm5/icon-select.js",
+  "esm2015": "esm2015/icon-select.js",
+  "fesm5": "fesm5/icon-select.js",
+  "fesm2015": "fesm2015/icon-select.js",
   "typings": "icon-select.d.ts",
-  "metadata": "icon-select.metadata.json"
+  "metadata": "icon-select.metadata.json",
+  "sideEffects": false
 }

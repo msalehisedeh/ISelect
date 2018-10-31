@@ -83,8 +83,8 @@ export class ISelect implements OnInit {
 	@Output("onchange")
 	public onchange = new EventEmitter();
 
-	private highlightIndex=0;
-	private searchedData:IconInfo[] = [];
+	highlightIndex=0;
+	searchedData:IconInfo[] = [];
 
 
 	config ={

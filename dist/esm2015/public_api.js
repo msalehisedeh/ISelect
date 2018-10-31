@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+export { ISelect, CSSImagePipe } from './src/app/iselect/components/iselect.component';
+export { ISelectDirective } from './src/app/iselect/directives/iselect.directive';
+export { ISelectModule } from './src/app/iselect/iselect.module';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2ljb24tc2VsZWN0LyIsInNvdXJjZXMiOlsicHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQ0EsT0FBTyxFQUFFLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxnREFBZ0QsQ0FBQztBQUN2RixPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSxnREFBZ0QsQ0FBQztBQUVsRixPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0sa0NBQWtDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuZXhwb3J0IHsgSVNlbGVjdCwgQ1NTSW1hZ2VQaXBlIH0gZnJvbSAnLi9zcmMvYXBwL2lzZWxlY3QvY29tcG9uZW50cy9pc2VsZWN0LmNvbXBvbmVudCc7XHJcbmV4cG9ydCB7IElTZWxlY3REaXJlY3RpdmUgfSBmcm9tICcuL3NyYy9hcHAvaXNlbGVjdC9kaXJlY3RpdmVzL2lzZWxlY3QuZGlyZWN0aXZlJztcclxuXHJcbmV4cG9ydCB7IElTZWxlY3RNb2R1bGUgfSBmcm9tICcuL3NyYy9hcHAvaXNlbGVjdC9pc2VsZWN0Lm1vZHVsZSc7XHJcbiJdfQ==
