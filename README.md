@@ -16,6 +16,8 @@ MODULE:
 
 EXPORTS
 	ISelect,
+	IconInfo,
+	CSSImagePipe,
     ISelectDirective
 	
 DEPENDENCIES: 
@@ -24,7 +26,7 @@ DEPENDENCIES:
 
 ## So... How it can be done?
 
-Run `npm install icon-select` in your application. and do either of the following:
+Run `npm install @sedeh/icon-select` in your application. and do either of the following:
 
 Sample usage through using i-select component or i-select directive.
 ```javascript
@@ -50,6 +52,7 @@ Sample usage through using i-select component or i-select directive.
 
 | Version | Description                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------------|
+| 1.2.2   | Fixed accessibility issues.                                                                              |
 | 1.2.1   | Updated dependencies.                                                                                    |
 | 1.2.0   | It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing. |
 | 1.1.0   | Updated libraries to become compatible with Angular 6+.                                                  |
@@ -62,3 +65,21 @@ It is that simple..!!
 Sample view of the component at work!
 ![alt text](https://raw.githubusercontent.com/msalehisedeh/iselect/master/sample.png "What you would see when a comparison is performed")
 
+### How to include font-awesome in your project?
+
+In your project root folder, find and open the file 'angular-cli.json' in any editor 
+Locate the styles[] array and add font-awesome references directory. like:
+
+```javascript
+"apps": 
+	[
+        {
+            ....
+            "styles": [
+              "../node_modules/font-awesome/css/font-awesome.css"
+              "styles.css"
+            ],
+            ...
+        }
+    ]
+```

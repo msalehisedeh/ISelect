@@ -3,6 +3,9 @@
 }
 
 :host {
+    p {
+        margin: 0;
+    }
     .titles {
         z-index: 3;
         color: #fff;
@@ -14,8 +17,9 @@
             margin: 0;
         }
         .centered {
-            float: left;
             margin-top: 25px;
+            display: block;
+            background-color: transparent;
         }
     }
     .pickedIcon {

@@ -3,8 +3,8 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <h2>Background: {{selectedImage ? selectedImage.name : 'TBD'}}</h2>
-  <h3>Cover pattern: {{selectedPattern ? selectedPattern.name:''}}</h3>
+  <p>Please select a background and a pattern image:</p>
+  <p>You can tab into drop-down and use arrow buttons to select a different image.</p>
   <div class="centered">
     <i-select 
       id="backgroundPicker" 
@@ -23,6 +23,8 @@
       <option *ngFor="let x of iconpickeOverlay" [value]="x.value" [textContent]="x.name"></option>
     </select>
   </div>
+  <p>Selected background: {{selectedImage ? selectedImage.name : 'TBD'}}</p>
+  <p>Selected cover pattern: {{selectedPattern ? selectedPattern.name:''}}</p>
 </div>
 
 <div 

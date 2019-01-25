@@ -1,10 +1,12 @@
 <div class="i-select" [id]="configID">
     <div class="selected-icon">
-        <div class="select-icon-block" 
+        <div class="select-icon-block" (click)="toggleIconSelector()" #iconBox
             [style.background]="config.selectedItem ? (config.selectedItem.value | CSSImage:true)  : ''"></div>
         <div class="fa-li fa fa-spinner fa-spin select-icon-spin3" *ngIf="config.loading"></div>
     </div>
-    <a href="#" class="i-select-button" 
+    <a href="#" #searchButton
+        class="i-select-button" 
+        [class.focus]="config.open"
         (click)="popIcons($event)" 
         (keyup)="keyboardTracker($event)" >
     <span class="off-screen" id="{{configID}}name" [textContent]="configName"></span>

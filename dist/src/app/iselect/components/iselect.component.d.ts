@@ -17,9 +17,11 @@ export declare class CSSImagePipe implements PipeTransform {
 export declare class ISelect implements OnInit {
     private renderer;
     selectedIndex: number;
+    private iconBox;
+    private iconContainer;
     private searchIcon;
     private searchInput;
-    private iconContainer;
+    private searchButton;
     configID: string;
     configName: string;
     searchEnabled: boolean;

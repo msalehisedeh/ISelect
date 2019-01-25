@@ -3,7 +3,7 @@
     margin:0;
     padding:0;
     border:0;
-    vertical-align: baseline
+    vertical-align: baseline;
 }
 
 :host {
@@ -11,6 +11,7 @@
     text-align:left;
     vertical-align: middle;
     margin: 2px 0;
+    width: 150px;
 
     .off-screen {
         display: block;
@@ -101,7 +102,7 @@
         background-color:#ccc;
         background-size:contain;
         display:block;
-        width:60px;
+        width: calc(100% - 20px);
         height:100%;
         float:left;
         position:relative;
@@ -111,7 +112,7 @@
             cursor:default;
             color:#404040;
             height:100%;
-            width:60px
+            width:100%
         }
     }
     .i-select{
@@ -119,6 +120,7 @@
         background-color:#fff;
         border:1px solid #ededed;
         border-radius:0 4px 4px 0;
+        position: relative;
 
         &.focused{
             border:1px dotted #444;
@@ -156,15 +158,16 @@
     .i-select-button {
         cursor:pointer;
         display:block;
-        float:left;
         height:100%;
         text-align:center;
         width:20px;
         background-color: #f4f4f4;
         border-left: 1px solid #e1e1e1;
-        border-radius: 0 4px 4px 0;
-    
-        &:focus {
+        border-radius: 0 2px 2px 0;
+        position: absolute;
+        right: -1px;
+
+        &:focus, &.focus {
             .select-icon-up-dir {
                 border-top:5px solid grey;
             }

@@ -3,8 +3,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
 	Component,
-	ComponentFactory, 
-	ReflectiveInjector,
 	ViewContainerRef,
 	Input,
 	Output,
@@ -48,9 +46,11 @@ export class ISelect implements OnInit {
 
 	public selectedIndex:number = 1;
 	
+	@ViewChild('iconBox', {read: ViewContainerRef}) private iconBox: ViewContainerRef;
+	@ViewChild('iconContainer', {read: ViewContainerRef}) private iconContainer: ViewContainerRef;
 	@ViewChild('searchIcon', {read: ViewContainerRef}) private searchIcon: ViewContainerRef;
 	@ViewChild('searchInput', {read: ViewContainerRef}) private searchInput: ViewContainerRef;
-	@ViewChild('iconContainer', {read: ViewContainerRef}) private iconContainer: ViewContainerRef;
+	@ViewChild('searchButton', {read: ViewContainerRef}) private searchButton: ViewContainerRef;
 	
 	@Input("id")
 	public configID:string = "";
@@ -101,7 +101,7 @@ export class ISelect implements OnInit {
 
 	@HostListener('window:click', ['$event'])
 	onClick($event:KeyboardEvent) {
-		if (this.config.open) {
+		if ($event.target !== this.iconBox.element.nativeElement  && this.config.open) {
 			this.toggleIconSelector();
 		}
 	}
@@ -120,25 +120,37 @@ export class ISelect implements OnInit {
 		$event.stopPropagation();
 		$event.preventDefault();
 		let key = $event.charCode || $event.keyCode || 0;
-		console.log(key)
+
 		if(key===39 || key===40){//right or down arrow
-		setTimeout(()=>{
-			let index = this.highlightIndex;
-			if(index<this.displayItems.length-1){
-				this.highlightIcon(index+1);
-			}else if(this.config.currentPage<this.config.totalPage){
-				this.next($event);
+			setTimeout(()=>{
+				let index = this.highlightIndex;
+				if(index<this.displayItems.length-1){
+					this.highlightIcon(index+1);
+				}else if(this.config.currentPage<this.config.totalPage){
+					this.next($event);
+				}
+			},66);
+		} else if(key===37 || key===38){//left or up arrow
+			setTimeout(()=>{
+				let index = this.highlightIndex;
+				if(index>0){
+					this.highlightIcon(index-1);
+				}else if(this.config.currentPage>1){
+					this.prev($event);
+				}
+			},66);
+		}
+		if (key === 40) {
+			this.config.open = true;
+			if (this.searchInput) {
+				setTimeout(()=> {
+					this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'focus', [])
+					this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'select', []);
+				}, 22);
 			}
-		},66);
-		}else if(key===37 || key===38){//left or up arrow
-		setTimeout(()=>{
-			let index = this.highlightIndex;
-			if(index>0){
-				this.highlightIcon(index-1);
-			}else if(this.config.currentPage>1){
-				this.prev($event);
-			}
-		},66);
+		} else if (key === 38 && this.highlightIndex === 0) {
+			this.config.open = false;
+			this.renderer.invokeElementMethod(this.searchButton.element.nativeElement, 'focus', []);
 		}
 		return false;
 	}
