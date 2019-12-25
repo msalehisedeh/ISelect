@@ -1,38 +1,18 @@
-import { PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Renderer, EventEmitter, OnInit, ElementRef } from "@angular/core";
-export interface IconInfo {
-    id?: number;
-    name: string;
-    value: string;
-    label?: string;
-    selected?: boolean;
-    disabled?: boolean;
-}
-export declare class CSSImagePipe implements PipeTransform {
-    private sanitizer;
-    constructor(sanitizer: DomSanitizer);
-    transform(url: string, repeat?: boolean): any;
-}
-export declare class ISelect implements OnInit {
+import { Renderer, EventEmitter, ElementRef, ChangeDetectorRef, AfterViewInit } from "@angular/core";
+import { Preloader } from "./preloader.service";
+import { IconInfo } from "./iselect.interface";
+export declare class ISelect implements AfterViewInit {
+    private preloader;
+    private detector;
     private renderer;
     selectedIndex: number;
-    private iconBox;
-    private iconContainer;
-    private searchIcon;
-    private searchInput;
-    private searchButton;
-    configID: string;
-    configName: string;
-    searchEnabled: boolean;
-    size: number;
-    multiselect: boolean;
-    showIconName: boolean;
-    configData: IconInfo[];
     displayItems: IconInfo[];
-    onchange: EventEmitter<{}>;
+    favoriteItems: IconInfo[];
     highlightIndex: number;
+    slideShowInterval: any;
+    slideShowIndex: number;
     searchedData: IconInfo[];
+    initianalized: boolean;
     config: {
         totalPage: number;
         currentPage: number;
@@ -44,11 +24,41 @@ export declare class ISelect implements OnInit {
         loading: boolean;
         selectedItem: IconInfo;
     };
-    onClick($event: KeyboardEvent): void;
-    private el;
-    constructor(el: ElementRef, renderer: Renderer);
-    ngOnInit(): void;
+    private iconBox;
+    private iconContainer;
+    private searchIcon;
+    private searchInput;
+    private searchButton;
+    id: string;
+    name: string;
+    controlls: any;
+    searchEnabled: boolean;
+    size: number;
+    showIconName: boolean;
+    template: any;
+    slideShowEnabled: boolean;
+    applyLayoutType: boolean;
+    applyOpacity: boolean;
+    applyPattern: boolean;
+    applyAnimation: boolean;
+    applySlideShow: boolean;
+    entries: IconInfo[];
+    onchange: EventEmitter<any>;
+    ontoggle: EventEmitter<any>;
+    enabledShow: EventEmitter<any>;
+    onClick($event: any): void;
+    private host;
+    constructor(el: ElementRef, preloader: Preloader, detector: ChangeDetectorRef, renderer: Renderer);
+    ngAfterViewInit(): void;
+    repeat(event: any): void;
+    private stopSlideShow;
+    private startSlideShow;
+    enableShow(event: any): void;
+    slideShow(): void;
+    addToFavorite(event: any): void;
+    mold(event: any): void;
     keyboardTracker($event: KeyboardEvent): boolean;
+    keyup(event: any): void;
     performSearch($event: KeyboardEvent, searchString: string): boolean;
     resetSearch(): void;
     next($event: any): boolean;
@@ -57,9 +67,12 @@ export declare class ISelect implements OnInit {
     first($event: any): boolean;
     renderIconContainer(): void;
     toggleIconSelector(): void;
-    private findSelectedIndex();
+    private emitChange;
+    private emitToggle;
+    private deselectAll;
     selectIcon(index: number): void;
     highlightIcon(index: number): void;
+    animation($event: any): void;
     popIcons($event: any): boolean;
-    ngOnChanges(changes: any): void;
+    selectedSourceUrl(): string;
 }

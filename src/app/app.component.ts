@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 
-import { IconInfo } from './iselect/components/iselect.component';
+import { IconInfo } from './iselect/components/iselect.interface';
 
 @Component({
 	selector: 'app-root',
@@ -13,44 +13,139 @@ import { IconInfo } from './iselect/components/iselect.component';
 	@ViewChild('pickedoverlay', {read: ViewContainerRef}) private pickedoverlay: ViewContainerRef;
 	@ViewChild('pickedImage', {read: ViewContainerRef}) private pickedImage: ViewContainerRef;
 
-	iconpickeData:IconInfo[] = [];
-	iconpickeOverlay:IconInfo[] = [];
-	selectedImage:IconInfo = null;
-	selectedPattern:IconInfo = null;
+	pickData: IconInfo[] = [];
+	overlayData: IconInfo[] = [];
+	selectedImage: IconInfo = null;
+	selectedPattern: IconInfo = null;
 
-	constructor(){
-		this.iconpickeData = [
-			{name:"my image 1",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Hopetoun_falls.jpg/300px-Hopetoun_falls.jpg"},
-			{name:"my image 2",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Galunggung.jpg/300px-Galunggung.jpg"},
-			{name:"my image 3",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/250px-Top_of_Atmosphere.jpg"},
-			{name:"my image 4",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ocean_from_Leblon.jpg/220px-Ocean_from_Leblon.jpg"},
-			{name:"my image 5",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Lake_mapourika_NZ.jpeg/220px-Lake_mapourika_NZ.jpeg"},
-			{name:"my image 6",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Mill_Pond_Sunset.jpg/220px-Mill_Pond_Sunset.jpg"},
-			{name:"my image 7",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/View_from_Cairo_Tower_31march2007.jpg/220px-View_from_Cairo_Tower_31march2007.jpg"},
-			{name:"my image 8",value:"https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Hawaii_Creek.jpg/220px-Hawaii_Creek.jpg"},
-			{name:"my image 9",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/View_of_loch_lomond.JPG/200px-View_of_loch_lomond.JPG"},
-			{name:"my image 10",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Chicago_Downtown_Aerial_View.jpg/220px-Chicago_Downtown_Aerial_View.jpg"},
-			{name:"my image 11",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Biogradska_suma.jpg/220px-Biogradska_suma.jpg"},
-			{name:"my image 12",value:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Na_Pali_Coast_-_Kauai.jpg/220px-Na_Pali_Coast_-_Kauai.jpg"}
+	constructor() {
+		this.pickData = [
+			{
+				name:"my image 1", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Hopetoun_falls.jpg/300px-Hopetoun_falls.jpg"},
+			{
+				name:"my image 2", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Galunggung.jpg/300px-Galunggung.jpg"},
+			{
+				name:"my video 1", 
+				type: 'video',
+				opacity: 1, 
+				selected: true, 
+				poster: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Nevada_Fall%2C_Yosemite_NP%2C_CA%2C_US_-_Diliff.jpg/800px-Nevada_Fall%2C_Yosemite_NP%2C_CA%2C_US_-_Diliff.jpg',
+				value:"https://s3.amazonaws.com/freestock-transcoded-videos-prod/transcoded/freestock_v2680286.mp4"},
+			{
+				name:"my live stream 1", 
+				type: 'stream',
+				opacity: 1, 
+				poster: 'https://live.staticflickr.com/1221/5144443317_0bf8fdde0e_b.jpg',
+				value:"http://166.211.148.254/mjpg/video.mjpg"},
+			{
+				name:"my webGL 1", 
+				type: 'webGL',
+				opacity: 1, 
+				poster: 'https://html5gamedevelopment.com/wp-content/uploads/files/d0/2/153/bloglarge/webgl-macaroni.png',
+				value:"https://alteredqualia.com/three/examples/webgl_pasta.html"},
+			{
+				name:"my image 3", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/250px-Top_of_Atmosphere.jpg"},
+			{
+				name:"my image 4", 
+				opacity: 1, 
+				molded: true,
+				animation: 'sepia',
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ocean_from_Leblon.jpg/220px-Ocean_from_Leblon.jpg"},
+			{
+				name:"my image 5", 
+				opacity: 1,
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Lake_mapourika_NZ.jpeg/220px-Lake_mapourika_NZ.jpeg"},
+			{
+				name:"my image 6", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Mill_Pond_Sunset.jpg/220px-Mill_Pond_Sunset.jpg"},
+			{
+				name:"my image 7", 
+				opacity: 1, 
+				molded: true,
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/View_from_Cairo_Tower_31march2007.jpg/220px-View_from_Cairo_Tower_31march2007.jpg"},
+			{
+				name:"my image 8", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/View_of_loch_lomond.JPG/200px-View_of_loch_lomond.JPG"},
+			{
+				name:"my image 9", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Chicago_Downtown_Aerial_View.jpg/220px-Chicago_Downtown_Aerial_View.jpg"},
+			{
+				name:"my image 10", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Biogradska_suma.jpg/220px-Biogradska_suma.jpg"},
+			{
+				name:"my image 11", 
+				opacity: 1, 
+				value:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Na_Pali_Coast_-_Kauai.jpg/220px-Na_Pali_Coast_-_Kauai.jpg"},
+			{
+				name:"zebra", 
+				opacity: 1, 
+				repeat: true,
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/zebra.png"},
+			{
+				name:"cox", 
+				opacity: 1, 
+				repeat: true,
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/cox.png"}
 		];
 
-		this.iconpickeOverlay= [
-			{name:"sand paper",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/sand-paper.png"},
-			{name:"zebra",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/zebra.png"},
-			{name:"f2",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/f2.png"},
-			{name:"cox",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/cox.png"},
-			{name:"mill",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/mill.png"},
-			{name:"tiz",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/tiz.png"},
-			{name:"puff",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/puff.png"},
-			{name:"board",value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/board.png"}
+		this.overlayData= [
+			{
+				name:"sand paper", 
+				opacity: 0.7, 
+				selected: true, 
+				animation: 'fade',
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/sand-paper.png"},
+			{
+				name:"zebra", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/zebra.png"},
+			{
+				name:"f2", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/f2.png"},
+			{
+				name:"cox", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/cox.png"},
+			{
+				name:"mill", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/mill.png"},
+			{
+				name:"tiz", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/tiz.png"},
+			{
+				name:"puff", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/puff.png"},
+			{
+				name:"board", 
+				opacity: 0.6, 
+				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/board.png"}
 		]
 	}
 
-	updateOverlay(item:IconInfo){
+	updateOverlay(item: IconInfo): void {
 		this.selectedPattern = item;
 	}
-
-	updateSelection(item:IconInfo){
+	toggleOverlay(item: IconInfo): void {
+		this.selectedPattern = item;
+	}
+	updateSelection(item: IconInfo): void {
+		this.selectedImage = item;
+	}
+	toggleSelection(item: IconInfo): void {
 		this.selectedImage = item;
 	}
 }

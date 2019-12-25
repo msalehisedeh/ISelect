@@ -1,8 +1,12 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule, DatePipe, CurrencyPipe, DecimalPipe, JsonPipe, SlicePipe, UpperCasePipe, LowerCasePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
-import { ISelect, CSSImagePipe } from './components/iselect.component';
-import { ISelectDirective } from './directives/iselect.directive'
+import { ISelect } from './components/iselect.component';
+import { Preloader } from './components/preloader.service';
+import { CSSImagePipe } from './components/iselect.pipe';
+import { IRenderer } from './components/irenderer.component';
+import { ISelectDirective } from './directives/iselect.directive';
+import { IselectSanitizePipe } from './components/iselect.sanitize.pipe';
 
 @NgModule({
   imports: [
@@ -10,19 +14,26 @@ import { ISelectDirective } from './directives/iselect.directive'
   ],
   declarations: [
     ISelect,
+    IRenderer,
     CSSImagePipe,
+    IselectSanitizePipe,
     ISelectDirective
   ],
   exports: [
     ISelect,
+    IRenderer,
     CSSImagePipe,
+    IselectSanitizePipe,
     ISelectDirective
   ],
   entryComponents: [
+    IRenderer,
     ISelect
   ],
   providers: [
     CSSImagePipe,
+    IselectSanitizePipe,
+    Preloader,
     ISelectDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

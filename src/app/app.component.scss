@@ -6,8 +6,13 @@
     p {
         margin: 0;
     }
+	.resources {
+      margin: 10px 0 20px 0;
+      a {
+        color: #fff;
+      }
+    }
     .titles {
-        z-index: 3;
         color: #fff;
         position: absolute;
         top: 20px;
@@ -20,24 +25,6 @@
             margin-top: 25px;
             display: block;
             background-color: transparent;
-        }
-    }
-    .pickedIcon {
-        box-sizing: border-box;
-        margin:0;
-        padding:0;
-        width: 100vw;
-        height: 100%;
-
-        &.cover {
-            background-size: cover !important;
-            position: absolute;
-            top: 0;
-        }
-        .pickedPattern {
-            width: 100%;
-            height: 100%;
-            opacity: 0.4;
         }
     }
 }

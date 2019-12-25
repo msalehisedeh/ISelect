@@ -5,7 +5,16 @@ export declare class ISelectDirective implements OnInit {
     private componentFactoryResolver;
     private data;
     searchEnabled: boolean;
-    change: EventEmitter<{}>;
+    template: any;
+    applyLayoutType: boolean;
+    applyOpacity: boolean;
+    applyPattern: boolean;
+    applyAnimation: boolean;
+    slideShowEnabled: boolean;
+    applySlideShow: boolean;
+    controlls: any;
+    change: EventEmitter<any>;
+    ontoggle: EventEmitter<any>;
     constructor(viewRef: ViewContainerRef, el: ElementRef, componentFactoryResolver: ComponentFactoryResolver);
     ngOnInit(): void;
 }

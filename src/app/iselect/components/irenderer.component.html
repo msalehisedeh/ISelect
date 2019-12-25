@@ -1,0 +1,18 @@
+<div
+  class="{{animation}} {{repeat === false ? 'cover' : ''}} {{absoluteState === true ? 'absolute' : ''}}"
+  [style.opacity]="opacity === undefined ? null : opacity"
+  [style.background]="(type === 'video' || type === 'webGL') ? null : value | CSSImage:refrenceId:repeat:molded" >
+  <video
+    *ngIf="type === 'video'" 
+    width="100%" 
+    preload="true" 
+    autoplay="autoplay" 
+    loop="loop"
+    [attr.src]="value" 
+    [attr.poster]="poster"></video>
+  <iframe 
+    *ngIf="type === 'webGL'" 
+    [attr.src]="value | safeHTML"></iframe>
+  <ng-content></ng-content>
+</div>
+
