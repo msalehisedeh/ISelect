@@ -25,8 +25,6 @@ export declare class ISelect implements AfterViewInit {
         selectedItem: IconInfo;
     };
     private iconBox;
-    private iconContainer;
-    private searchIcon;
     private searchInput;
     private searchButton;
     id: string;

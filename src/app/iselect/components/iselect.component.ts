@@ -48,11 +48,10 @@ export class ISelect implements AfterViewInit {
 		selectedItem:<IconInfo>null
 	}
 
-	@ViewChild('iconBox', {static: false}) private iconBox: ViewContainerRef;
-	@ViewChild('iconContainer', {static: false}) private iconContainer: ViewContainerRef;
-	@ViewChild('searchIcon', {static: false}) private searchIcon: ViewContainerRef;
-	@ViewChild('searchInput', {static: false}) private searchInput: ViewContainerRef;
-	@ViewChild('searchButton', {static: false}) private searchButton: ViewContainerRef;
+	@ViewChild('iconBox', {static: false}) private iconBox: ElementRef;
+	// @ViewChild('searchIcon', {static: false}) private searchIcon: ElementRef;
+	@ViewChild('searchInput', {static: false}) private searchInput: ElementRef;
+	@ViewChild('searchButton', {static: false}) private searchButton: ElementRef;
 	
 	@Input() id: string = "";
 	@Input() name: string = "";
@@ -96,8 +95,7 @@ export class ISelect implements AfterViewInit {
 			}
 			node = node.parentNode;
 		}
-		
-		if (!inside && $event.target !== this.iconBox.element.nativeElement  && this.config.open) {
+		if (!inside && this.iconBox && $event.target !== this.iconBox.nativeElement  && this.config.open) {
 			this.toggleIconSelector();
 		}
 	}
@@ -225,13 +223,17 @@ export class ISelect implements AfterViewInit {
 			this.config.open = true;
 			if (this.searchInput) {
 				setTimeout(() => {
-					this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'focus', [])
-					this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'select', []);
-				}, 22);
+					if (this.searchInput) {
+						this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'focus', [])
+						this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'select', []);
+					}
+				}, 66);
 			}
 		} else if (key === 38 && this.highlightIndex === 0) {
 			this.config.open = false;
-			this.renderer.invokeElementMethod(this.searchButton.element.nativeElement, 'focus', []);
+			if (this.searchButton) {
+				this.renderer.invokeElementMethod(this.searchButton.nativeElement, 'focus', []);
+			}
 		}
 		return false;
 	}
@@ -279,7 +281,9 @@ export class ISelect implements AfterViewInit {
 		this.detector.detectChanges();
 	}
 	resetSearch() {
-		this.renderer.setElementAttribute(this.searchInput.element.nativeElement, 'value', '');
+		if (this.searchInput) {
+			this.renderer.setElementAttribute(this.searchInput.nativeElement, 'value', '');
+		}
 
 		//this.searchIcon.removeClass('picker-icon-cancel');
 		//this.searchIcon.addClass('picker-icon-search');
@@ -356,9 +360,11 @@ export class ISelect implements AfterViewInit {
 
 		if (this.config.open && this.searchEnabled) {
 			setTimeout(() => {
-				this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'focus', []);
-				this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'select', []);
-			}, 20);
+				if (this.searchInput) {
+					this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'focus', []);
+					this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'select', []);
+				}
+			}, 66);
 		}
 	}
 	private emitChange(item: any, callback: any) {

@@ -303,7 +303,7 @@
                 }
                 node = node.parentNode;
             }
-            if (!inside && $event.target !== this.iconBox.element.nativeElement && this.config.open) {
+            if (!inside && this.iconBox && $event.target !== this.iconBox.nativeElement && this.config.open) {
                 this.toggleIconSelector();
             }
         };
@@ -426,14 +426,18 @@
                 this.config.open = true;
                 if (this.searchInput) {
                     setTimeout(function () {
-                        _this.renderer.invokeElementMethod(_this.searchInput.element.nativeElement, 'focus', []);
-                        _this.renderer.invokeElementMethod(_this.searchInput.element.nativeElement, 'select', []);
-                    }, 22);
+                        if (_this.searchInput) {
+                            _this.renderer.invokeElementMethod(_this.searchInput.nativeElement, 'focus', []);
+                            _this.renderer.invokeElementMethod(_this.searchInput.nativeElement, 'select', []);
+                        }
+                    }, 66);
                 }
             }
             else if (key === 38 && this.highlightIndex === 0) {
                 this.config.open = false;
-                this.renderer.invokeElementMethod(this.searchButton.element.nativeElement, 'focus', []);
+                if (this.searchButton) {
+                    this.renderer.invokeElementMethod(this.searchButton.nativeElement, 'focus', []);
+                }
             }
             return false;
         };
@@ -481,7 +485,9 @@
             this.detector.detectChanges();
         };
         ISelect.prototype.resetSearch = function () {
-            this.renderer.setElementAttribute(this.searchInput.element.nativeElement, 'value', '');
+            if (this.searchInput) {
+                this.renderer.setElementAttribute(this.searchInput.nativeElement, 'value', '');
+            }
             //this.searchIcon.removeClass('picker-icon-cancel');
             //this.searchIcon.addClass('picker-icon-search');
             this.config.currentPage = 1;
@@ -548,9 +554,11 @@
             this.config.open = !this.config.open;
             if (this.config.open && this.searchEnabled) {
                 setTimeout(function () {
-                    _this.renderer.invokeElementMethod(_this.searchInput.element.nativeElement, 'focus', []);
-                    _this.renderer.invokeElementMethod(_this.searchInput.element.nativeElement, 'select', []);
-                }, 20);
+                    if (_this.searchInput) {
+                        _this.renderer.invokeElementMethod(_this.searchInput.nativeElement, 'focus', []);
+                        _this.renderer.invokeElementMethod(_this.searchInput.nativeElement, 'select', []);
+                    }
+                }, 66);
             }
         };
         ISelect.prototype.emitChange = function (item, callback) {
@@ -640,12 +648,6 @@
         __decorate([
             core.ViewChild('iconBox', { static: false })
         ], ISelect.prototype, "iconBox", void 0);
-        __decorate([
-            core.ViewChild('iconContainer', { static: false })
-        ], ISelect.prototype, "iconContainer", void 0);
-        __decorate([
-            core.ViewChild('searchIcon', { static: false })
-        ], ISelect.prototype, "searchIcon", void 0);
         __decorate([
             core.ViewChild('searchInput', { static: false })
         ], ISelect.prototype, "searchInput", void 0);

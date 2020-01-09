@@ -103,7 +103,7 @@ let ISelect = class ISelect {
             }
             node = node.parentNode;
         }
-        if (!inside && $event.target !== this.iconBox.element.nativeElement && this.config.open) {
+        if (!inside && this.iconBox && $event.target !== this.iconBox.nativeElement && this.config.open) {
             this.toggleIconSelector();
         }
     }
@@ -223,14 +223,18 @@ let ISelect = class ISelect {
             this.config.open = true;
             if (this.searchInput) {
                 setTimeout(() => {
-                    this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'focus', []);
-                    this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'select', []);
-                }, 22);
+                    if (this.searchInput) {
+                        this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'focus', []);
+                        this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'select', []);
+                    }
+                }, 66);
             }
         }
         else if (key === 38 && this.highlightIndex === 0) {
             this.config.open = false;
-            this.renderer.invokeElementMethod(this.searchButton.element.nativeElement, 'focus', []);
+            if (this.searchButton) {
+                this.renderer.invokeElementMethod(this.searchButton.nativeElement, 'focus', []);
+            }
         }
         return false;
     }
@@ -278,7 +282,9 @@ let ISelect = class ISelect {
         this.detector.detectChanges();
     }
     resetSearch() {
-        this.renderer.setElementAttribute(this.searchInput.element.nativeElement, 'value', '');
+        if (this.searchInput) {
+            this.renderer.setElementAttribute(this.searchInput.nativeElement, 'value', '');
+        }
         //this.searchIcon.removeClass('picker-icon-cancel');
         //this.searchIcon.addClass('picker-icon-search');
         this.config.currentPage = 1;
@@ -344,9 +350,11 @@ let ISelect = class ISelect {
         this.config.open = !this.config.open;
         if (this.config.open && this.searchEnabled) {
             setTimeout(() => {
-                this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'focus', []);
-                this.renderer.invokeElementMethod(this.searchInput.element.nativeElement, 'select', []);
-            }, 20);
+                if (this.searchInput) {
+                    this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'focus', []);
+                    this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'select', []);
+                }
+            }, 66);
         }
     }
     emitChange(item, callback) {
@@ -433,12 +441,6 @@ ISelect.ctorParameters = () => [
 __decorate([
     ViewChild('iconBox', { static: false })
 ], ISelect.prototype, "iconBox", void 0);
-__decorate([
-    ViewChild('iconContainer', { static: false })
-], ISelect.prototype, "iconContainer", void 0);
-__decorate([
-    ViewChild('searchIcon', { static: false })
-], ISelect.prototype, "searchIcon", void 0);
 __decorate([
     ViewChild('searchInput', { static: false })
 ], ISelect.prototype, "searchInput", void 0);

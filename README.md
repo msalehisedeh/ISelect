@@ -176,6 +176,7 @@ where myfonts = {
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 2.0.1   | fixed null pointer issue on stackblitz demo site.                                             |
 | 2.0.0   | Updated to Angular 8.                                                                         |
 | 1.6.3   | Removed "crossorigin" attribute from video and iframe tag to see if stackblitz would allow display of items with Mozilla browser. |
 | 1.6.2   | Fixed autoplay of video at strartup. the key is to set the type last on i-renderer.           |

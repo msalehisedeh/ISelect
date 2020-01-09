@@ -10,8 +10,8 @@ import { IconInfo } from './iselect/components/iselect.interface';
   export class AppComponent {
 	title = 'ISelect';
 
-	@ViewChild('pickedoverlay', {read: ViewContainerRef}) private pickedoverlay: ViewContainerRef;
-	@ViewChild('pickedImage', {read: ViewContainerRef}) private pickedImage: ViewContainerRef;
+	@ViewChild('pickedoverlay', {static: false}) private pickedoverlay: ViewContainerRef;
+	@ViewChild('pickedImage', {static: false}) private pickedImage: ViewContainerRef;
 
 	pickData: IconInfo[] = [];
 	overlayData: IconInfo[] = [];
@@ -90,49 +90,49 @@ import { IconInfo } from './iselect/components/iselect.interface';
 				name:"zebra", 
 				opacity: 1, 
 				repeat: true,
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/zebra.png"},
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/bona.png"},
 			{
 				name:"cox", 
 				opacity: 1, 
 				repeat: true,
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/cox.png"}
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/blinder.png"}
 		];
 
 		this.overlayData= [
 			{
-				name:"sand paper", 
+				name:"dotted", 
 				opacity: 0.7, 
-				selected: true, 
 				animation: 'fade',
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/sand-paper.png"},
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/dotted.png"},
+			{
+				name:"jigsaw", 
+				opacity: 0.6, 
+				selected: true, 
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/jigsaw.png"},
+			{
+				name:"maze", 
+				opacity: 0.6, 
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/maze.png"},
+			{
+				name:"mosaic", 
+				opacity: 0.6, 
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/mosaic.png"},
+			{
+				name:"snake-skin", 
+				opacity: 0.6, 
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/snake-skin.png"},
+			{
+				name:"tile", 
+				opacity: 0.6, 
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/tile.png"},
+			{
+				name:"toor", 
+				opacity: 0.6, 
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/toor.png"},
 			{
 				name:"zebra", 
 				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/zebra.png"},
-			{
-				name:"f2", 
-				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/f2.png"},
-			{
-				name:"cox", 
-				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/cox.png"},
-			{
-				name:"mill", 
-				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/mill.png"},
-			{
-				name:"tiz", 
-				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/tiz.png"},
-			{
-				name:"puff", 
-				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/puff.png"},
-			{
-				name:"board", 
-				opacity: 0.6, 
-				value:"https://www.petsblock.com/resources/styles/petsblock/images/mesh/board.png"}
+				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/zebra.png"}
 		]
 	}
 
