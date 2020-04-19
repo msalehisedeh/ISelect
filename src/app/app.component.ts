@@ -1,4 +1,5 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { IconInfo } from './iselect/components/iselect.interface';
 
@@ -18,7 +19,7 @@ import { IconInfo } from './iselect/components/iselect.interface';
 	selectedImage: IconInfo = null;
 	selectedPattern: IconInfo = null;
 
-	constructor() {
+	constructor(private client: HttpClient) {
 		this.pickData = [
 			{
 				name:"my image 1", 
@@ -39,7 +40,7 @@ import { IconInfo } from './iselect/components/iselect.interface';
 				name:"my live stream 1", 
 				type: 'stream',
 				opacity: 1, 
-				poster: 'https://live.staticflickr.com/1221/5144443317_0bf8fdde0e_b.jpg',
+				poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDQcqGAkmKA9QLhFL7xWuGAMI8Qr6B6d0CfmE8eevUTSrF6t9d&s',
 				value:"http://166.211.148.254/mjpg/video.mjpg"},
 			{
 				name:"my webGL 1", 
@@ -97,43 +98,28 @@ import { IconInfo } from './iselect/components/iselect.interface';
 				repeat: true,
 				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/blinder.png"}
 		];
-
-		this.overlayData= [
-			{
-				name:"dotted", 
-				opacity: 0.7, 
-				animation: 'fade',
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/dotted.png"},
-			{
-				name:"jigsaw", 
-				opacity: 0.6, 
-				selected: true, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/jigsaw.png"},
-			{
-				name:"maze", 
-				opacity: 0.6, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/maze.png"},
-			{
-				name:"mosaic", 
-				opacity: 0.6, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/mosaic.png"},
-			{
-				name:"snake-skin", 
-				opacity: 0.6, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/snake-skin.png"},
-			{
-				name:"tile", 
-				opacity: 0.6, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/tile.png"},
-			{
-				name:"toor", 
-				opacity: 0.6, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/toor.png"},
-			{
-				name:"zebra", 
-				opacity: 0.6, 
-				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/zebra.png"}
-		]
+    this.overlayData = [];
+    this.client.get(
+      'https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/patterns.json'
+    ).subscribe(
+      (list: string[]) => {
+        if (list) {
+          list.map(
+            (item) => {
+              this.overlayData.push({
+                name: item.substring(0, item.lastIndexOf('.')), 
+                opacity: 0.7, 
+                animation: 'disabled',
+                value: "https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/" + item
+              });
+            }
+          );
+        }
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
 	}
 
 	updateOverlay(item: IconInfo): void {
@@ -149,3 +135,4 @@ import { IconInfo } from './iselect/components/iselect.interface';
 		this.selectedImage = item;
 	}
 }
+

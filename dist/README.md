@@ -176,6 +176,7 @@ where myfonts = {
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 2.0.3   | null pointer exception fix on delayed loadabvle options.                                      |
 | 2.0.2   | Background image postioning on image selewct pop up is fixed.                                 |
 | 2.0.1   | fixed null pointer issue on stackblitz demo site.                                             |
 | 2.0.0   | Updated to Angular 8.                                                                         |

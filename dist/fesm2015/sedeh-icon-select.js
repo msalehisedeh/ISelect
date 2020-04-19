@@ -131,17 +131,21 @@ let ISelect = class ISelect {
                 this.config.loading = false;
             }
             this.config.selectedItem = this.displayItems[this.highlightIndex];
-            this.detector.detectChanges();
-            this.preloader.contains(this.id, this.config.selectedItem.value);
-            if (!this.startSlideShow()) {
-                setTimeout(() => {
-                    this.ontoggle.emit(this.config.selectedItem);
-                }, 66);
+            if (this.config.selectedItem) {
+                this.preloader.contains(this.id, this.config.selectedItem.value);
+                if (!this.startSlideShow()) {
+                    setTimeout(() => {
+                        this.ontoggle.emit(this.config.selectedItem);
+                    }, 66);
+                }
             }
+            this.detector.detectChanges();
         }
     }
     repeat(event) {
-        this.config.selectedItem.repeat = !this.config.selectedItem.repeat;
+        if (this.config.selectedItem) {
+            this.config.selectedItem.repeat = !this.config.selectedItem.repeat;
+        }
     }
     stopSlideShow() {
         if (this.slideShowInterval) {
@@ -177,21 +181,25 @@ let ISelect = class ISelect {
         this.slideShowIndex++;
     }
     addToFavorite(event) {
-        this.config.selectedItem.favorite = !this.config.selectedItem.favorite;
-        if (this.config.selectedItem.favorite) {
-            this.preloader.image(this.id, this.config.selectedItem.value);
-            this.favoriteItems.push(this.config.selectedItem);
+        if (this.config.selectedItem) {
+            this.config.selectedItem.favorite = !this.config.selectedItem.favorite;
+            if (this.config.selectedItem.favorite) {
+                this.preloader.image(this.id, this.config.selectedItem.value);
+                this.favoriteItems.push(this.config.selectedItem);
+            }
+            else {
+                const index = this.favoriteItems.indexOf(this.config.selectedItem);
+                this.favoriteItems.splice(index, 1);
+            }
+            this.startSlideShow();
         }
-        else {
-            const index = this.favoriteItems.indexOf(this.config.selectedItem);
-            this.favoriteItems.splice(index, 1);
-        }
-        this.startSlideShow();
     }
     mold(event) {
-        this.config.selectedItem.molded = !this.config.selectedItem.molded;
-        this.stopSlideShow();
-        this.emitChange(this.config.selectedItem, () => this.startSlideShow());
+        if (this.config.selectedItem) {
+            this.config.selectedItem.molded = !this.config.selectedItem.molded;
+            this.stopSlideShow();
+            this.emitChange(this.config.selectedItem, () => this.startSlideShow());
+        }
     }
     keyboardTracker($event) {
         $event.stopPropagation();
@@ -428,8 +436,11 @@ let ISelect = class ISelect {
         return false;
     }
     selectedSourceUrl() {
-        return (!this.config.selectedItem.type || this.config.selectedItem.type == 'image') ?
-            this.config.selectedItem.value : this.config.selectedItem.poster;
+        return this.config.selectedItem ?
+            ((!this.config.selectedItem.type || this.config.selectedItem.type == 'image') ?
+                this.config.selectedItem.value :
+                this.config.selectedItem.poster) :
+            '';
     }
 };
 ISelect.ctorParameters = () => [

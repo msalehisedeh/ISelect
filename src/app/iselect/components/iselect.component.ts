@@ -135,17 +135,21 @@ export class ISelect implements AfterViewInit {
 				this.config.loading = false;
 			}
 			this.config.selectedItem = this.displayItems[this.highlightIndex];
-			this.detector.detectChanges();
-			this.preloader.contains(this.id, this.config.selectedItem.value);
-			if (!this.startSlideShow()) {
-				setTimeout(() => {
-					this.ontoggle.emit(this.config.selectedItem);
-				}, 66);
+			if (this.config.selectedItem) {
+				this.preloader.contains(this.id, this.config.selectedItem.value);
+				if (!this.startSlideShow()) {
+					setTimeout(() => {
+						this.ontoggle.emit(this.config.selectedItem);
+					}, 66);
+				}
 			}
+			this.detector.detectChanges();
 		}
 	}
 	repeat(event: any) {
-		this.config.selectedItem.repeat = !this.config.selectedItem.repeat;
+		if (this.config.selectedItem) {
+			this.config.selectedItem.repeat = !this.config.selectedItem.repeat;
+		}
 	}
 	private stopSlideShow() {
 		if (this.slideShowInterval) {
@@ -180,20 +184,24 @@ export class ISelect implements AfterViewInit {
 		this.slideShowIndex++;
 	}
 	addToFavorite(event: any) {
-		this.config.selectedItem.favorite = !this.config.selectedItem.favorite
-		if (this.config.selectedItem.favorite) {
-			this.preloader.image(this.id, this.config.selectedItem.value);
-			this.favoriteItems.push(this.config.selectedItem)
-		} else {
-			const index = this.favoriteItems.indexOf(this.config.selectedItem);
-			this.favoriteItems.splice(index, 1);
+		if (this.config.selectedItem) {
+			this.config.selectedItem.favorite = !this.config.selectedItem.favorite
+			if (this.config.selectedItem.favorite) {
+				this.preloader.image(this.id, this.config.selectedItem.value);
+				this.favoriteItems.push(this.config.selectedItem)
+			} else {
+				const index = this.favoriteItems.indexOf(this.config.selectedItem);
+				this.favoriteItems.splice(index, 1);
+			}
+			this.startSlideShow();
 		}
-		this.startSlideShow();
 	}
 	mold(event: any) {
-		this.config.selectedItem.molded = !this.config.selectedItem.molded
-		this.stopSlideShow();
-		this.emitChange(this.config.selectedItem, ()=> this.startSlideShow());
+		if (this.config.selectedItem) {
+			this.config.selectedItem.molded = !this.config.selectedItem.molded
+			this.stopSlideShow();
+			this.emitChange(this.config.selectedItem, ()=> this.startSlideShow());
+		}
 	}
 	keyboardTracker($event: KeyboardEvent) {
 		$event.stopPropagation();
@@ -438,7 +446,10 @@ export class ISelect implements AfterViewInit {
 		return false;
 	}
 	selectedSourceUrl() {
-		return (!this.config.selectedItem.type || this.config.selectedItem.type == 'image') ?
-				this.config.selectedItem.value : this.config.selectedItem.poster;
+		return this.config.selectedItem ?
+					((!this.config.selectedItem.type || this.config.selectedItem.type == 'image') ?
+						this.config.selectedItem.value :
+						this.config.selectedItem.poster) :
+					'';
 	}
 }
