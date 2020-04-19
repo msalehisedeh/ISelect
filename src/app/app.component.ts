@@ -10,6 +10,7 @@ import { IconInfo } from './iselect/components/iselect.interface';
   })
   export class AppComponent {
 	title = 'ISelect';
+	expanded = false;
 
 	@ViewChild('pickedoverlay', {static: false}) private pickedoverlay: ViewContainerRef;
 	@ViewChild('pickedImage', {static: false}) private pickedImage: ViewContainerRef;

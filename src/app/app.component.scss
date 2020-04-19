@@ -12,6 +12,24 @@
         color: #fff;
       }
     }
+    .info {
+        cursor: pointer;
+        &:before {
+            content: '\203A';
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        &.expanded {
+            &:before {
+                content: '\203A';
+                font-weight: bold;
+                display: inline-block;
+                margin-right: 10px;
+                transform: rotate(90deg);
+            }
+        }
+    }
     .titles {
         color: #fff;
         position: absolute;

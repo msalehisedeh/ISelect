@@ -4,16 +4,7 @@
     Welcome to {{ title }}!
   </h1>
   <p>Where you can select images, videos, live streaming, or webGL contents.</p>
-  <p>For video content, on Mozilla, click on site info icon and enable autoplay sound.</p>
-  <p>PLEASE NOTE: Stackblitz is preventing autoplay for video on Chrome.</p>
-  <p>PLEASE NOTE: Firefox 23, by default, blocks mixed content http live stream on https stackblitz url.</p>
-  <p>PLEASE NOTE: Live stream mjpg is not supported on IE11 on windows 7.</p>
-  <div  class="resources">
-    <a href="https://www.npmjs.com/package/@sedeh/icon-select">npm install @sedeh/icon-select</a>
-    <p>Tested On Safari, Chrome, Mozilla, and IE11 browsers.</p>
-  </div>
   <p>Please select a background and a pattern image:</p>
-  <p>You can tab into drop-down and use arrow buttons to select a different image.</p>
   <div class="centered">
     <i-select
       id="backgroundPicker" 
@@ -50,6 +41,24 @@
   </div>
   <p>Selected background: {{selectedImage ? selectedImage.name : 'TBD'}}</p>
   <p>Selected cover pattern: {{selectedPattern ? selectedPattern.name:''}}</p>
+  <br/>
+  <p class="info" [class.expanded]="expanded" (keyup)="$event.keyCode === 32 ? info.click() : true" (click)="expanded = !expanded">Additional Information</p>
+  <div #info [style.display]="expanded ? 'block' : 'none'">
+    <p>
+      You can tab into drop-down and use arrow buttons to select a different image. 
+      For video content, on Mozilla, click on site info icon and enable autoplay sound.
+    </p>
+    <br/>PLEASE NOTE:
+    <ul>
+      <li>Stackblitz is preventing autoplay for video on Chrome.</li>
+      <li>Firefox 23, by default, blocks mixed content http live stream on https stackblitz url.</li>
+      <li>Live stream mjpg is not supported on IE11 on windows 7.</li>
+    </ul>
+    <div  class="resources">
+      <a href="https://www.npmjs.com/package/@sedeh/icon-select">npm install @sedeh/icon-select</a>
+      <p>Tested On Safari, Chrome, Mozilla, and IE11 browsers.</p>
+    </div>
+  </div>
 </div>
 
 <i-renderer *ngIf="selectedImage != null"

@@ -401,9 +401,9 @@ export class ISelect implements AfterViewInit {
 		}
 	}
 	selectIcon(index: number) {
-		this.deselectAll();
-		this.highlightIndex = index;
 		if (this.displayItems && !this.displayItems[index].disabled) {
+			this.deselectAll();
+			this.highlightIndex = index;
 			for (let i:number=0;i<this.displayItems.length;i++){
 				this.entries[i].selected = false;
 				if (index === i) {

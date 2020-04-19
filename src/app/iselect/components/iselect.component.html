@@ -141,6 +141,7 @@
     </div>
 
     <div class="i-select-footer" *ngIf="config.showFooter">
+        <div class="iselect-total">Total: {{displayItems.length}}</div>
         <div class="i-select-arrows">
             <div class="{{controlls.previousPage ? controlls.previousPage : 'angle-left'}}"
                 (click)="prev($event)"
