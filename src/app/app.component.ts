@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { IconInfo } from './iselect/components/iselect.interface';
 
@@ -21,6 +21,28 @@ import { IconInfo } from './iselect/components/iselect.interface';
 	selectedPattern: IconInfo = null;
 
 	constructor(private client: HttpClient) {
+		this.overlayData = [];
+		this.client.get(
+		'https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/patterns.json'
+		).subscribe(
+		(list: string[]) => {
+			if (list) {
+			list.map(
+				(item) => {
+				this.overlayData.push({
+					name: item.substring(0, item.lastIndexOf('.')), 
+					opacity: 0.5, 
+					animation: 'disabled',
+					value: "https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/" + item
+				});
+				}
+			);
+			}
+		},
+		(error) => {
+			console.log('error', error);
+		}
+		);
 		this.pickData = [
 			{
 				name:"my image 1", 
@@ -99,30 +121,7 @@ import { IconInfo } from './iselect/components/iselect.interface';
 				repeat: true,
 				value:"https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/blinder.png"}
 		];
-    this.overlayData = [];
-    this.client.get(
-      'https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/patterns.json'
-    ).subscribe(
-      (list: string[]) => {
-        if (list) {
-          list.map(
-            (item) => {
-              this.overlayData.push({
-                name: item.substring(0, item.lastIndexOf('.')), 
-                opacity: 0.7, 
-                animation: 'disabled',
-                value: "https://raw.githubusercontent.com/msalehisedeh/resources/master/patterns/" + item
-              });
-            }
-          );
-        }
-      },
-      (error) => {
-        console.log('error', error);
-      }
-    );
 	}
-
 	updateOverlay(item: IconInfo): void {
 		this.selectedPattern = item;
 	}

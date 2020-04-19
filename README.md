@@ -176,6 +176,7 @@ where myfonts = {
 
 | Version | Description                                                                                   |
 |---------|-----------------------------------------------------------------------------------------------|
+| 2.0.5   | minor updates to look and feel.                                                               |
 | 2.0.4   | added total item display on pop panel.                                                        |
 | 2.0.3   | null pointer exception fix on delayed loadabvle options.                                      |
 | 2.0.2   | Background image postioning on image selewct pop up is fixed.                                 |

@@ -85,6 +85,7 @@
         class="i-select-search layout">
         <select 
             tabindex="0" 
+            title="Animation"
             style="width: 100%" 
             [id]="id + 'select'" 
             (keyup)="keyup($event)" 
@@ -133,7 +134,11 @@
     <div *ngIf="applyOpacity && config.selectedItem"
         class="i-select-search opacity" 
         (click)="$event.preventDefault();$event.stopPropagation()">
-        <input class="range" [attr.min]="0" [attr.max]="100"  type="range" 
+        <input class="range" 
+            [attr.min]="0" 
+            [attr.max]="100"  
+            type="range" 
+            title="Opacity"
             [attr.value]="config.selectedItem.opacity * 100" 
             (input)="config.selectedItem.opacity = $event.target.value / 100" 
             (change)="config.selectedItem.opacity = $event.target.value / 100" />
@@ -141,7 +146,7 @@
     </div>
 
     <div class="i-select-footer" *ngIf="config.showFooter">
-        <div class="iselect-total">Total: {{displayItems.length}}</div>
+        <div class="iselect-total">Total: {{entries.length}}</div>
         <div class="i-select-arrows">
             <div class="{{controlls.previousPage ? controlls.previousPage : 'angle-left'}}"
                 (click)="prev($event)"
