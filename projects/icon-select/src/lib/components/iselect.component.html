@@ -1,0 +1,172 @@
+<div class="i-select" [id]="id">
+    <div class="selected-icon">
+        <div class="select-icon-block" (click)="toggleIconSelector()" #iconBox
+            [style.background]="config.selectedItem ? (selectedSourceUrl() | CSSImage:id:true:false)  : ''"></div>
+        <div class="select-icon-spin3" *ngIf="config.loading"></div>
+    </div>
+    <a href="#" #searchButton
+        class="i-select-button" 
+        [class.focus]="config.open"
+        (click)="popIcons($event)" 
+        (keyup)="keyboardTracker($event)" >
+    <span class="off-screen" id="{{id}}name" [textContent]="name"></span>
+    <span class="select-icon-down-dir"></span>
+    </a>
+</div>
+
+<div class="i-select-popup" [style.display]="config.open ? 'block':'none'" >
+    <div class="i-select-search" (click)="searchInput.focus()" *ngIf="searchEnabled">
+        <input type="text" placeholder="placeholder" #searchInput
+            class="icons-search-input" 
+            [class.focused]="config.isFocused"
+            (focus)="config.isFocused=true"
+            (blur)="config.isFocused=false"
+            (keyup)="performSearch($event, searchInput.value)" />
+        <div class="select-icon-search" #searchIcon [class]="config.isSearch ? 'select-icon-cancel' : 'select-icon-search'"></div>
+    </div>
+    <div class="clear-fix"></div>
+    <div class="i-select-search" *ngIf="template">
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{data: false}">
+        </ng-container>
+    </div>
+    <div class="clear-fix"></div>
+    <div *ngIf="applySlideShow"
+        class="i-select-search layout">
+        <label [for]="id + 'slideshow'">
+            <input type="checkbox" tabindex="0"
+                [id]="id + 'slideshow'"
+                [checked]="slideShowEnabled ? true : null"
+                (keyup)="keyup($event)" 
+                (change)="enableShow($event)" />
+            Enable slideshow
+        </label>
+    </div>
+    <div class="clear-fix"></div>
+    <div role="list" attr.aria-nameledby="{{id}}name" class="select-icons-container" #iconContainer>
+        <div 
+            role="listitem" 
+            class="select-box" 
+            *ngFor="let item of displayItems; let i = index">
+            <div *ngIf="!item.type || item.type === 'image' || item.type === 'stream'"
+                [class.highlight-icon]="highlightIndex === i"
+                [class.disabled]="item.disabled"
+                [class.streaming]="item.type === 'stream'"
+                [title]="showIconName ? '':item.name"
+                [style.background]="item.value | CSSImage:id:true:false"
+                (click)="selectIcon(i)">
+                <span class="off-screen" [textContent]="item.name"></span>
+            </div>
+            <div *ngIf="item.type === 'video'"
+                [class.highlight-icon]="highlightIndex === i"
+                [class.disabled]="item.disabled"
+                [title]="showIconName ? '':item.name"
+                (click)="selectIcon(i)">
+                <video [attr.src]="item.value" [attr.poster]="item.poster" crossorigin disabled></video>
+                <span class="off-screen" [textContent]="item.name"></span>
+            </div>
+            <div *ngIf="item.poster && item.type === 'webGL'"
+                [class.highlight-icon]="highlightIndex === i"
+                [class.disabled]="item.disabled"
+                [title]="showIconName ? '':item.name"
+                [style.background]="item.poster | CSSImage:id:true:false"
+                (click)="selectIcon(i)">
+                <span class="off-screen" [textContent]="item.name"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="icons-select-error" *ngIf="config.hasError">
+        <div class="select-icon-block" data-select-value="select-icon-block"></div>
+    </div>
+
+    <div class="clear-fix"></div>
+
+    <div *ngIf="applyAnimation && config.selectedItem"
+        class="i-select-search layout">
+        <select 
+            tabindex="0" 
+            style="width: 100%" 
+            [id]="id + 'select'" 
+            (keyup)="keyup($event)" 
+            (change)="animation($event)">
+            <option value="disabled" [selected]="config.selectedItem.animation === 'disabled' ? true : null">Disabled</option>
+            <option value="zoom" [selected]="config.selectedItem.animation === 'zoom' ? true : null">Zoom</option>
+            <option value="fade" [selected]="config.selectedItem.animation === 'fade' ? true : null">Fade</option>
+            <option value="sepia" [selected]="config.selectedItem.animation === 'sepia' ? true : null">Sepia</option>
+            <option value="grayout" [selected]="config.selectedItem.animation === 'grayout' ? true : null">Grayout</option>
+            <option value="shake" [selected]="config.selectedItem.animation === 'shake' ? true : null">Shake</option>
+        </select>
+    </div>
+    <div *ngIf="applySlideShow && config.selectedItem"
+        class="i-select-search layout">
+        <label [for]="id + 'favorite'">
+            <input type="checkbox" tabindex="0"
+                [id]="id + 'favorite'"
+                [checked]="config.selectedItem.favorite ? true : null"
+                (keyup)="keyup($event)" 
+                (change)="addToFavorite($event)" />
+            Add to favorite
+        </label>
+    </div>
+    <div *ngIf="applyLayoutType && config.selectedItem && (!config.selectedItem.type || config.selectedItem.type === 'image')"
+        class="i-select-search layout">
+        <label [for]="id + 'pattern'">
+            <input type="checkbox" tabindex="0"
+                [id]="id + 'pattern'"
+                [checked]="config.selectedItem.repeat ? true : null"
+                (keyup)="keyup($event)" 
+                (change)="repeat($event)" />
+            Display Repeat
+        </label>
+    </div>
+    <div *ngIf="applyPattern && config.selectedItem && (!config.selectedItem.type || config.selectedItem.type === 'image')"
+        class="i-select-search layout">
+        <label [for]="id + 'mold'">
+            <input type="checkbox" tabindex="0"
+                [id]="id + 'mold'"
+                [checked]="config.selectedItem.molded ? true : null"
+                (keyup)="keyup($event)" 
+                (change)="mold($event)" />
+            Make Pattern
+        </label>
+    </div>
+    <div *ngIf="applyOpacity && config.selectedItem"
+        class="i-select-search opacity" 
+        (click)="$event.preventDefault();$event.stopPropagation()">
+        <input class="range" [attr.min]="0" [attr.max]="100"  type="range" 
+            [attr.value]="config.selectedItem.opacity * 100" 
+            (input)="config.selectedItem.opacity = valueOf($event) / 100" 
+            (change)="config.selectedItem.opacity = valueOf($event) / 100" />
+        <span class="slide-counter" [textContent]="config.selectedItem.opacity"></span>
+    </div>
+
+    <div class="i-select-footer" *ngIf="config.showFooter">
+        <div class="i-select-arrows">
+            <div class="{{controlls.previousPage ? controlls.previousPage : 'angle-left'}}"
+                (click)="prev($event)"
+                [class.disabled]="config.currentPage==1">
+                <span class="prev" [textContent]="'previous'"></span>
+            </div>
+            <div class="{{controlls.firstPage ? controlls.firstPage: 'angle-double-left'}}"
+                    (click)="first($event)"
+                    [class.disabled]="config.currentPage==1">
+                <span class="first" [textContent]="'first'"></span>
+            </div>
+            <div class="i-select-pages"><span [textContent]="config.currentPage + ' / ' + config.totalPage"></span></div>
+            <div class="{{controlls.lastPage ? controlls.lastPage : 'angle-double-right'}}"
+                    (click)="last($event)"
+                    [class.disabled]="config.currentPage==config.totalPage">
+                <span class="last" [textContent]="'last'"></span>
+            </div>
+            <div class="{{controlls.nextPage ? controlls.nextPage : 'angle-right'}}"
+                    (click)="next($event)"
+                    [class.disabled]="config.currentPage==config.totalPage">
+                <span class="next" [textContent]="'nextPage'"></span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showIconName" 
+        class="name" 
+        [textContent]="config.selectedItem ? config.selectedItem.name : ''"></div>
+</div>

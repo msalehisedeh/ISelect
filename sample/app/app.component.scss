@@ -1,0 +1,30 @@
+[imageholder] ::ng-deep img{
+    width: 200px;
+}
+
+:host {
+    p {
+        margin: 0;
+    }
+	.resources {
+      margin: 10px 0 20px 0;
+      a {
+        color: #fff;
+      }
+    }
+    .titles {
+        color: #fff;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        h1, h2, h3 {
+            color: #fff;
+            margin: 0;
+        }
+        .centered {
+            margin-top: 25px;
+            display: block;
+            background-color: transparent;
+        }
+    }
+}

@@ -1,0 +1,69 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="titles">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <p>Where you can select images, videos, live streaming, or webGL contents.</p>
+  <p>For video content, on Mozilla, click on site info icon and enable autoplay sound.</p>
+  <p>PLEASE NOTE: Stackblitz is preventing autoplay for video on Mozilla.</p>
+  <p>PLEASE NOTE: Live stream mjpg is not supported on IE11 on windows 7.</p>
+  <div  class="resources">
+    <a href="https://www.npmjs.com/package/@sedeh/icon-select">npm install &#64;sedeh/icon-select</a>
+    <p>Tested On Safari, Chrome, Mozilla, and IE11 browsers.</p>
+  </div>
+  <p>Please select a background and a pattern image:</p>
+  <p>You can tab into drop-down and use arrow buttons to select a different image.</p>
+  <div class="centered">
+    <i-select
+      id="backgroundPicker" 
+      name="selectedBackground" 
+      [size]="6" 
+      [entries]="pickData"
+      [searchEnabled]="true" 
+      [applyPattern]="true"
+      [applyLayoutType]="true"
+      [applyAnimation]="true"
+      [applySlideShow]="true"
+      (ontoggle)="toggleSelection($event)"
+      (onchange)="updateSelection($event)">
+    </i-select>
+  
+    <select i-select
+      id="overlayPicker" size="6" name="selectedOverlay"
+      [searchEnabled]="false" 
+      [applyOpacity]="true"
+      [applyAnimation]="true"
+      [applySlideShow]="true"
+      (ontoggle)="toggleOverlay($event)"
+      (change)="updateOverlay($event)" >
+      <option *ngFor="let x of overlayData" 
+        [attr.opacity]="x.opacity"
+        [attr.repeat]="x.repeat"
+        [attr.animation]="x.animation"
+        [attr.favorite]="x.favorite"
+        [attr.pattern]="x.pattern"
+        [selected]="x.selected ? 'true' : null" 
+        [value]="x.value" 
+        [textContent]="x.name"></option>
+    </select>
+  </div>
+  <p>Selected background: {{selectedImage ? selectedImage.name : 'TBD'}}</p>
+  <p>Selected cover pattern: {{selectedPattern ? selectedPattern.name:''}}</p>
+</div>
+
+<i-renderer *ngIf="selectedImage !== undefined"
+  refrenceId="backgroundPicker"
+  [absolute]="true"
+  [poster]="selectedImage.poster"
+  [repeat]="selectedImage.repeat"
+  [value]="selectedImage.value"
+  [molded]="selectedImage.molded"
+  [animation]="selectedImage.animation"
+  [type]="selectedImage.type">
+
+  <i-renderer *ngIf="selectedPattern !== undefined"
+    refrenceId="overlayPicker"
+    [value]="selectedPattern.value"
+    [opacity]="(selectedPattern && selectedPattern.opacity !== undefined) ? selectedPattern.opacity : 1"
+    [animation]="selectedPattern.animation"></i-renderer>
+</i-renderer>

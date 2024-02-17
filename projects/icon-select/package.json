@@ -1,0 +1,27 @@
+{
+  "name": "@sedeh/icon-select",
+  "version": "3.0.0",
+  "peerDependencies": {
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0",
+    "@sedeh/into-pipes": "^4.1.0",
+    "font-awesome": "^4.7.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "keywords": [
+    "Angular 6+",
+    "select",
+    "dropdown",
+    "icon",
+    "video",
+    "webGL",
+    "iconpicker",
+    "icon-picker",
+    "picker",
+    "easy",
+    "best"
+  ],
+  "sideEffects": false
+}
